@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.BookTripPage">
+   <children>
+      <ListView fx:id="listViewTrips" layoutX="413.0" layoutY="67.0" onMouseClicked="#btnListClick" prefHeight="302.0" prefWidth="265.0" />
+      <Label alignment="CENTER" layoutX="446.0" layoutY="28.0" prefHeight="17.0" prefWidth="200.0" text="Available Trips" textAlignment="CENTER" />
+      <Button layoutX="468.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnBookTrip" text="Book Trip" />
+      <Label layoutX="184.0" layoutY="98.0" text="Selected Trip:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblSelectedTrip" alignment="CENTER" layoutX="9.0" layoutY="122.0" prefHeight="17.0" prefWidth="387.0" text="Label" />
+      <Button layoutX="565.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnLoadTrips" text="Load Trips" />
+      <TextField fx:id="txtID" layoutX="11.0" layoutY="36.0" promptText="ID" />
+      <Label layoutX="36.0" layoutY="172.0" text="Price:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" layoutX="35.0" layoutY="195.0" prefHeight="17.0" prefWidth="33.0" text="Label" />
+      <Label layoutX="194.0" layoutY="172.0" text="From:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFrom" layoutX="194.0" layoutY="195.0" text="Label" />
+      <Label layoutX="324.0" layoutY="169.0" text="To:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTo" layoutX="324.0" layoutY="192.0" text="Label" />
+      <Label layoutX="38.0" layoutY="280.0" text="Start Date:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStartDate" layoutX="38.0" layoutY="303.0" text="Label" />
+      <Label layoutX="194.0" layoutY="280.0" text="End Date:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblEndDate" layoutX="196.0" layoutY="303.0" text="Label" />
+      <Label layoutX="327.0" layoutY="277.0" text="Bus Number:">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBusNumber" layoutX="327.0" layoutY="300.0" text="Label" />
+   </children>
+</Pane>
