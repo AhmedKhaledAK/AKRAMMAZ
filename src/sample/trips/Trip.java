@@ -2,7 +2,11 @@ package sample.trips;
 
 
 import sample.dates.Date;
+import sample.peoples.Driver;
 import sample.vehicles.Bus;
+import sample.vehicles.Limo;
+import sample.vehicles.MiniBus;
+import sample.vehicles.Vehicle;
 
 public class Trip {
     private int tripNumber;
@@ -10,7 +14,8 @@ public class Trip {
     private String pickUp;
     private String destination;
     private float cost;
-    Bus bus;
+    Vehicle vehicle;
+    Driver driver;
     boolean external, internal, oneWay, roundWay, oneStop, manyStops, nonStops;
 
 
@@ -122,12 +127,26 @@ public class Trip {
         this.cost = 15;
     }
 
-    public Bus getBus() {
-        return bus;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setBus(Bus bus) {
-        this.bus = bus;
+    public void setVehicle(String type) {
+        if(type.equalsIgnoreCase("Bus")){
+            vehicle=new Bus();
+        }else if (type.equalsIgnoreCase("Minibus")){
+            vehicle=new MiniBus();
+        }else {
+            vehicle=new Limo();
+        }
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     @Override
@@ -144,7 +163,7 @@ public class Trip {
                 ", " + oneStop +
                 ", " + manyStops +
                 ", " + nonStops +
-                ", " + bus.getNumber() +
+                ", " + vehicle.getNumber() +
                 ", " + cost;
     }
 }

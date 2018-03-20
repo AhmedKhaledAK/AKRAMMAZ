@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.AddDriverPage">
+   <children>
+      <TextField fx:id="txtDriverNumber" layoutX="188.0" layoutY="94.0" />
+      <Button layoutX="153.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnAddDriver" prefHeight="71.0" prefWidth="219.0" text="Button" />
+      <Button layoutX="36.0" layoutY="248.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
+   </children>
+</Pane>

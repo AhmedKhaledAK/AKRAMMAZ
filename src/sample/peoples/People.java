@@ -1,8 +1,8 @@
 package sample.peoples;
 
 public abstract class People {
-    private String name;
-    private String ID;
+    String name;
+    String ID;
 
     public String getName() {
         return name;

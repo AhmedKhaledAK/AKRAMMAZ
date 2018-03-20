@@ -28,5 +28,8 @@ public class ManagerPage {
         scenes.btnAll(actionEvent, "DeleteBusPage.fxml", "sample.gui.ManagerPage");
     }
 
+    public void btnAddDriver(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "AddDriverPage.fxml", "sample.gui.ManagerPage");
+    }
 
 }

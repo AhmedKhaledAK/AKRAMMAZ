@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Bus extends Vehicle {
 
     private int counter;
-    ArrayList<Passenger>passengers;
+
 
     public Bus() {
         counter = 0;
@@ -29,15 +29,6 @@ public class Bus extends Vehicle {
         if(counter == capacity-1) return;
         passengers.add(passenger);
         counter++;
-    }
-
-    public int search(int number, ArrayList<Bus> buses) {
-        for (int i = 0; i < buses.size(); i++) {
-            if (Integer.parseInt(buses.get(i).getNumber()+"") == number) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     @Override

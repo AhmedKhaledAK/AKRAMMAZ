@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import sample.Main;
+import sample.Scenes;
 import sample.files.FileClass;
 import sample.lang.Error;
 
 public class DeleteBusPage {
+
+    Scenes scenes = new Scenes();
 
     @FXML
     TextField txtBusNumber;
@@ -26,6 +29,10 @@ public class DeleteBusPage {
         }
         FileClass fileClass = new FileClass("C:/Users/User/bus.txt");
         fileClass.writeToFile(Main.busList, 0);
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "ManagerPage.fxml", "sample.gui.DeleteBusPage");
     }
 }
 

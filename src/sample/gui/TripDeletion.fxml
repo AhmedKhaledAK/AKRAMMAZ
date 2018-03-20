@@ -18,5 +18,6 @@
          </font>
       </Button>
       <Button layoutX="449.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnLoadTrips" text="Load Trips" />
+      <Button layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
    </children>
 </Pane>

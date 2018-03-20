@@ -1,12 +1,15 @@
 package sample.vehicles;
 
-import sample.dates.Date;
+import sample.peoples.Passenger;
+import java.util.ArrayList;
 
 public abstract class Vehicle {
 
     short capacity;
     int number;
     boolean available;
+    ArrayList<Passenger> passengers;
+    private int counter;
 
     public abstract void setCapacity();
 
@@ -32,5 +35,11 @@ public abstract class Vehicle {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public void setPassengers(Passenger passenger) {
+        if(counter == capacity-1) return;
+        passengers.add(passenger);
+        counter++;
     }
 }
