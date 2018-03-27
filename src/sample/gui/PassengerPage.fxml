@@ -11,10 +11,11 @@
             <Font name="Bernard MT Condensed" size="35.0" />
          </font>
       </Button>
-      <Button layoutX="394.0" layoutY="89.0" mnemonicParsing="false" prefHeight="181.0" prefWidth="217.0" text="Book a Limo">
+      <Button layoutX="394.0" layoutY="89.0" mnemonicParsing="false" onAction="#btnBookingLimoPage" prefHeight="181.0" prefWidth="217.0" text="Book a Limo">
          <font>
             <Font name="Bernard MT Condensed" size="35.0" />
          </font>
       </Button>
+      <Button layoutX="291.0" layoutY="286.0" mnemonicParsing="false" onAction="#btnCancelPage" text="Cancel" />
    </children>
 </Pane>

@@ -9,7 +9,7 @@ public class VehicleFactory {
             vehicle=new Bus();
         }else if (type.equalsIgnoreCase("Minibus")){
             vehicle=new MiniBus();
-        }else {
+        }else if(type.equalsIgnoreCase("limo")){
             vehicle=new Limo();
         }
         return vehicle;

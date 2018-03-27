@@ -15,4 +15,12 @@ public class PassengerPage {
     public void btnBookingTripPage(ActionEvent actionEvent) throws Exception{
         scenes.btnAll(actionEvent, "BookTripPage.fxml", "sample.gui.PassengerPage");
     }
+
+    public void btnBookingLimoPage(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "BookLimoPage.fxml", "sample.gui.PassengerPage");
+    }
+
+    public void btnCancelPage(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "CancelTripPage.fxml", "sample.gui.PassengerPage");
+    }
 }

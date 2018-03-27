@@ -2,14 +2,27 @@ package sample.vehicles;
 
 import sample.peoples.Passenger;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Vehicle {
 
     short capacity;
     int number;
     boolean available;
-    ArrayList<Passenger> passengers;
-    private int counter;
+    public ArrayList<Passenger> passengers;
+    int counter;
+
+    public Vehicle(){
+        passengers = new ArrayList<>();
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
 
     public abstract void setCapacity();
 
@@ -41,5 +54,13 @@ public abstract class Vehicle {
         if(counter == capacity-1) return;
         passengers.add(passenger);
         counter++;
+    }
+
+    public void addPassengers(ArrayList<Passenger> passengers){
+        this.passengers.addAll(passengers);
+    }
+
+    public String toString() {
+        return number + "," + available + "," + Arrays.toString(passengers.toArray());
     }
 }

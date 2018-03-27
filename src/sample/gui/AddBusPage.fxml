@@ -18,5 +18,7 @@
       <CheckBox fx:id="chkBxBus" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" text="Bus" />
       <CheckBox fx:id="chkBxMini" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" text="Minibus" />
       <CheckBox fx:id="chkBxLimo" layoutX="9.0" layoutY="118.0" mnemonicParsing="false" text="Limo" />
+      <TextField fx:id="txtLimoType" layoutX="419.0" layoutY="62.0" />
+      <TextField fx:id="txtLimoColor" layoutX="419.0" layoutY="106.0" />
    </children>
 </Pane>

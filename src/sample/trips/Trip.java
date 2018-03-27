@@ -16,6 +16,7 @@ public class Trip {
     private float cost;
     Vehicle vehicle;
     Driver driver;
+    String tripType;
     boolean external, internal, oneWay, roundWay, oneStop, manyStops, nonStops;
 
 
@@ -149,6 +150,20 @@ public class Trip {
         this.driver = driver;
     }
 
+    public void setTripType() {
+        if(vehicle instanceof Bus){
+            tripType = "bus";
+        }else if(vehicle instanceof MiniBus){
+            tripType = "minibus";
+        }else if(vehicle instanceof  Limo){
+            tripType = "limo";
+        }
+    }
+
+    public String getTripType(){
+        return tripType;
+    }
+
     @Override
     public String toString() {
         return tripNumber +
@@ -164,6 +179,8 @@ public class Trip {
                 ", " + manyStops +
                 ", " + nonStops +
                 ", " + vehicle.getNumber() +
-                ", " + cost;
+                ", " + driver.getID() +
+                ", " + tripType +
+                 ", " + cost;
     }
 }

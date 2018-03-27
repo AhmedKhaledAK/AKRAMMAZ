@@ -22,8 +22,6 @@ public abstract class People {
 
     @Override
     public String toString() {
-        return "People{" +
-                "ID='" + ID + '\'' +
-                '}';
+        return ID + "";
     }
 }

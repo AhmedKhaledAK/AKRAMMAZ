@@ -2,8 +2,10 @@ package sample.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import sample.Controller;
+import sample.Interfaces.ITrip;
 import sample.lang.Error;
 import sample.Main;
 import sample.dates.Date;
@@ -13,6 +15,8 @@ import sample.peoples.Manager;
 import sample.trips.Trip;
 import sample.vehicles.Bus;
 import sample.vehicles.Vehicle;
+
+import java.util.ArrayList;
 
 public class TripCreation {
 
@@ -24,61 +28,91 @@ public class TripCreation {
     @FXML
     TextField txtTo;
     @FXML
-    TextField txtOn;
+    DatePicker datePickerStart;
     @FXML
-    TextField txtToDate;
+    DatePicker datePickerEnd;
     @FXML
-    CheckBox chkBxExternal;
+    RadioButton rdioBtnExternal;
     @FXML
-    CheckBox chkBxInternal;
+    RadioButton rdioBtnInternal;
     @FXML
-    CheckBox chkBxOneWay;
+    RadioButton rdioBtnOneWay;
     @FXML
-    CheckBox chkBxRoundWay;
+    RadioButton rdioBtnRoundWay;
     @FXML
-    CheckBox chkBxOneStop;
+    RadioButton rdioBtnOneStop;
     @FXML
-    CheckBox chkBxNonStop;
+    RadioButton rdioBtnNonStop;
     @FXML
-    CheckBox chkBxManyStops;
+    RadioButton rdioButtonManyStops;
     @FXML
     TextField txtBusNumber;
     @FXML
     TextField txtDriverNumber;
     @FXML
-    CheckBox chkBxBus;
+    RadioButton rdioBtnBus;
     @FXML
-    CheckBox chkBxMini;
+    RadioButton rdioBtnMini;
+    @FXML
+    RadioButton rdioButtonLimo;
+
+    private ToggleGroup toggleGroup = new ToggleGroup();
+    private  ToggleGroup toggleGroup1 = new ToggleGroup();
+    private  ToggleGroup toggleGroup2 = new ToggleGroup();
+    private  ToggleGroup toggleGroup3 = new ToggleGroup();
+    @FXML
+    public void initialize(){
+        rdioBtnBus.setToggleGroup(toggleGroup);
+        rdioBtnMini.setToggleGroup(toggleGroup);
+        rdioButtonLimo.setToggleGroup(toggleGroup);
+
+        rdioBtnExternal.setToggleGroup(toggleGroup1);
+        rdioBtnInternal.setToggleGroup(toggleGroup1);
+        rdioBtnOneStop.setToggleGroup(toggleGroup2);
+        rdioBtnNonStop.setToggleGroup(toggleGroup2);
+        rdioButtonManyStops.setToggleGroup(toggleGroup2);
+        rdioBtnRoundWay.setToggleGroup(toggleGroup3);
+        rdioBtnOneWay.setToggleGroup(toggleGroup3);
+
+        if(Controller.pageType){
+            txtDriverNumber.setVisible(false);
+            txtBusNumber.setVisible(false);
+            txtTripNumber.setVisible(false);
+            rdioBtnBus.setVisible(false);
+            rdioBtnMini.setVisible(false);
+        }
+    }
 
     public void btnCreateTrip(ActionEvent actionEvent) {
         trip = new Trip();
         trip.setTripNumber(Integer.parseInt(txtTripNumber.getText()));
+        
         Date date = new Date();
-        date.setStartDate(txtOn.getText());
-        date.setEndDate(txtToDate.getText());
+        date.setStartDate(datePickerStart.getValue().toString());
+        date.setEndDate(datePickerEnd.getValue().toString());
         trip.setTripDate(date);
         trip.setPickUp(txtFrom.getText());
         trip.setDestination(txtTo.getText());
         trip.setCost();
-        if (chkBxExternal.isSelected()) {
+        if (rdioBtnExternal.isSelected()) {
             trip.setExternal();
         }
-        if (chkBxInternal.isSelected()) {
+        if (rdioBtnInternal.isSelected()) {
             trip.setInternal();
         }
-        if (chkBxOneWay.isSelected()) {
+        if (rdioBtnOneWay.isSelected()) {
             trip.setOneWay();
         }
-        if (chkBxRoundWay.isSelected()) {
+        if (rdioBtnRoundWay.isSelected()) {
             trip.setRoundWay();
         }
-        if (chkBxOneStop.isSelected()) {
+        if (rdioBtnOneStop.isSelected()) {
             trip.setOneStop();
         }
-        if (chkBxManyStops.isSelected()) {
+        if (rdioButtonManyStops.isSelected()) {
             trip.setManyStops();
         }
-        if (chkBxNonStop.isSelected()) {
+        if (rdioBtnNonStop.isSelected()) {
             trip.setNonStops();
         }
         System.out.println(txtBusNumber.getText());
@@ -86,30 +120,46 @@ public class TripCreation {
         Driver driver = new Driver();
         driver.setID(txtDriverNumber.getText());
         trip.setDriver(driver);
-        if(chkBxBus.isSelected()){
+        if(rdioBtnMini.isSelected()){
             trip.setVehicle("bus");
-        }else if(chkBxMini.isSelected()){
+        }else if(rdioBtnBus.isSelected()){
             trip.setVehicle("minibus");
         }
         Vehicle vehicle = trip.getVehicle();
-        int in = manager.searchBus(Integer.parseInt(txtBusNumber.getText()), Main.busList);
+        trip.setTripType();
+        ArrayList<Vehicle> vehicles=null;
+        int f=0;
+        if(trip.getTripType().equals("bus")){
+            vehicles = Main.busList;
+            f=1;
+        }else if(trip.getTripType().equals("minibus")){
+            vehicles = Main.miniList;
+            f=2;
+        }else if(trip.getTripType().equals("limo")){
+            vehicles = Main.limoList;
+            f=3;
+        }
+        int in = manager.searchBus(Integer.parseInt(txtBusNumber.getText()), vehicles);
         int din = manager.searchDriver(driver.getID(), Main.driverList);
         if(in!=-1){
             if(din!=-1) {
                 if (manager.search(trip.getTripNumber(), Main.list) == -1) {
-                    if (Main.busList.get(in).isAvailable()) {
-                        driver.setAvaialble(false);
-                        Main.driverList.remove(din);
-                        Main.driverList.add(driver);
-                        FileClass fileClass = new FileClass("C:/Users/User/driver.txt");
-                        fileClass.writeDrivers(Main.driverList,0,0);
+                    if (vehicles.get(in).isAvailable()) {
                         if (Main.driverList.get(din).isAvaialble()) {
                             vehicle.setNumber(Integer.parseInt(txtBusNumber.getText()));
                             vehicle.setAvailable(false);
-                            Main.busList.remove(in);
-                            Main.busList.add(vehicle);
-                            FileClass fc = new FileClass("C:/Users/User/bus.txt");
-                            fc.writeToFile(Main.busList, 0);
+                            vehicles.remove(in);
+                            vehicles.add(vehicle);
+                            FileClass fc = new FileClass("C:/Users/User/"+trip.getTripType()+".txt");
+                            fc.writeToFile(vehicles, 0);
+                            driver.setAvaialble(false);
+                            Main.driverList.remove(din);
+                            Main.driverList.add(driver);
+                            FileClass fileClass = new FileClass("C:/Users/User/driver.txt");
+                            fileClass.writeDrivers(Main.driverList,0,0);
+                            if(f==1) Main.busList=vehicles;
+                            else if(f==2) Main.miniList=vehicles;
+                            else if(f==3) Main.limoList=vehicles;
                         } else Error.error("Error", "Bus Not Added",
                                 "It looks like the bus is found but not available at the time.");
                     }

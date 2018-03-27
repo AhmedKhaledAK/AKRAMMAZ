@@ -8,11 +8,8 @@ import java.util.Arrays;
 
 public class Bus extends Vehicle {
 
-    private int counter;
-
 
     public Bus() {
-        counter = 0;
         passengers = new ArrayList<>();
     }
 
@@ -31,8 +28,4 @@ public class Bus extends Vehicle {
         counter++;
     }
 
-    @Override
-    public String toString() {
-        return number + "," + available + "," + Arrays.toString(passengers.toArray());
-    }
 }

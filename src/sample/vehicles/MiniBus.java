@@ -1,13 +1,12 @@
 package sample.vehicles;
 
 public class MiniBus extends Vehicle {
+    public MiniBus(){
+        this.capacity=16;
+    }
     @Override
     public void setCapacity() {
-        this.capacity=20;
+        this.capacity=10;
     }
 
-    @Override
-    public String toString() {
-        return  number + "," +  available;
-    }
 }

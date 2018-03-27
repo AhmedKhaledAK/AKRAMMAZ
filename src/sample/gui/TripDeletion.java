@@ -40,10 +40,6 @@ public class TripDeletion {
         fileClass.writeToFile(Main.list);
         ol=FXCollections.observableArrayList(Main.list);
         lv.setItems(ol);
-        FileClass fileClass1 = new FileClass("C:/Users/User/bus.txt");
-        int in = manager.searchBus(t, Main.busList);
-        Main.busList.remove(in);
-        fileClass1.writeToFile(Main.busList,0);
     }
 
     public void btnLoadTrips(ActionEvent actionEvent) {
