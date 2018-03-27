@@ -10,7 +10,7 @@ import sample.Scenes;
 
 public class ManagerPage {
 
-    Scenes scenes = new Scenes();
+    private Scenes scenes = new Scenes();
 
     public void btnCreateTripPage(ActionEvent actionEvent) throws Exception{
         scenes.btnAll(actionEvent, "TripCreation.fxml", "sample.gui.ManagerPage");
@@ -34,5 +34,9 @@ public class ManagerPage {
 
     public void btnDeleteDriverPage(ActionEvent actionEvent) throws Exception {
         scenes.btnAll(actionEvent, "DeleteDriverPage.fxml", "sample.gui.ManagerPage");
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "sample.sample.fxml", "sample.gui.ManagerPage");
     }
 }

@@ -44,4 +44,8 @@ public class Control {
         }
         return 0;
     }
+
+    public static boolean isValidID(String id){
+        return (id.length() == 14) && id.matches("[0-9]+");
+    }
 }

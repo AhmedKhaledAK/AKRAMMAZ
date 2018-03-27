@@ -2,6 +2,7 @@ package sample.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import sample.Main;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class DeleteBusPage {
 
-    Scenes scenes = new Scenes();
+    private Scenes scenes = new Scenes();
 
     @FXML
     TextField txtBusNumber;
@@ -38,6 +39,7 @@ public class DeleteBusPage {
             vehicles = Main.limoList;
             flag3=1;
         }
+        assert vehicles != null;
         for (int i = 0; i < vehicles.size(); i++){
             if(Integer.parseInt(txtBusNumber.getText()) == vehicles.get(i).getNumber()){
                 if(vehicles.get(i).isAvailable()){
@@ -56,9 +58,13 @@ public class DeleteBusPage {
                         Main.limoList=vehicles;
                     }
                     fc.writeToFile(vehicles, 0);
+                    Error.error(Alert.AlertType.INFORMATION, "Information", "Success", "Congratulations, " +
+                            "vehicle is deleted.");
                 }
                 else {
-                    Error.error("Error", "Bus not deleted", "It looks like the bus is assigned to a trip." +
+                    Error.error(Alert.AlertType.ERROR,"Error", "Vehicle not deleted", "It looks like the " +
+                            "vehicle" +
+                            " is assigned to a trip." +
                             "Delete the trip first.");
                 }
             }

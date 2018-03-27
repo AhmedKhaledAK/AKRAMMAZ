@@ -2,6 +2,7 @@ package sample.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import sample.Main;
 import sample.Scenes;
@@ -12,7 +13,7 @@ import sample.peoples.Manager;
 
 public class AddDriverPage {
 
-    Scenes scenes = new Scenes();
+    private Scenes scenes = new Scenes();
 
     @FXML
     TextField txtDriverNumber;
@@ -28,8 +29,10 @@ public class AddDriverPage {
             Main.driverList.add(d);
             FileClass fileClass = new FileClass("C:/Users/User/driver.txt");
             fileClass.writeDrivers(Main.driverList, 0,0);
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Driver Added", "Congratulations, " +
+                    "the driver has been added.");
         }else {
-            Error.error("Error", "Driver not Added", "It looks like there's another driver" +
+            Error.error(Alert.AlertType.ERROR,"Error", "Driver not Added", "It looks like there's another driver" +
                     " with the same ID");
         }
     }

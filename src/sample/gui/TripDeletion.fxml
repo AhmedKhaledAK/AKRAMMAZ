@@ -4,11 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.TripDeletion">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.TripDeletion">
    <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.69" pickOnBounds="true">
+         <image>
+            <Image url="@Transport.png" />
+         </image>
+      </ImageView>
       <ListView fx:id="lv" layoutX="375.0" layoutY="71.0" prefHeight="276.0" prefWidth="200.0" />
       <Label layoutX="454.0" layoutY="36.0" text="Trips:" />
       <TextField fx:id="txtTripNumber" layoutX="25.0" layoutY="85.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter trip no. to be deleted" />
@@ -17,7 +24,7 @@
             <Font name="Bodoni MT Condensed Bold Italic" size="35.0" />
          </font>
       </Button>
-      <Button layoutX="449.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnLoadTrips" text="Load Trips" />
+      <Button layoutX="449.0" layoutY="361.0" mnemonicParsing="false" text="Load Trips" />
       <Button layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
    </children>
 </Pane>

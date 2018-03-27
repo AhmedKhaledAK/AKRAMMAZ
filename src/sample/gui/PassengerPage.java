@@ -10,7 +10,7 @@ import sample.Scenes;
 
 public class PassengerPage {
 
-    Scenes scenes = new Scenes();
+    private Scenes scenes = new Scenes();
 
     public void btnBookingTripPage(ActionEvent actionEvent) throws Exception{
         scenes.btnAll(actionEvent, "BookTripPage.fxml", "sample.gui.PassengerPage");
@@ -22,5 +22,9 @@ public class PassengerPage {
 
     public void btnCancelPage(ActionEvent actionEvent) throws Exception {
         scenes.btnAll(actionEvent, "CancelTripPage.fxml", "sample.gui.PassengerPage");
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "sample.sample.fxml", "sample.gui.PassengerPage");
     }
 }

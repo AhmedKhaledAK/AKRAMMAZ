@@ -2,13 +2,12 @@ package sample.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import sample.Control;
-import sample.Controller;
 import sample.Main;
+import sample.Scenes;
 import sample.dates.Date;
+import sample.lang.Error;
 import sample.peoples.Passenger;
 import sample.trips.Trip;
 
@@ -20,9 +19,9 @@ public class BookLimoPage {
     @FXML
     TextField txtTo;
     @FXML
-    TextField txtOn;
+    DatePicker datePickerStart;
     @FXML
-    TextField txtToDate;
+    DatePicker datePickerEnd;
     @FXML
     TextField txtID;
     @FXML
@@ -44,6 +43,8 @@ public class BookLimoPage {
     @FXML
     TextField txtPromoCode;
 
+    private Scenes scenes = new Scenes();
+
     private ToggleGroup toggleGroup = new ToggleGroup();
     private  ToggleGroup toggleGroup1 = new ToggleGroup();
     private  ToggleGroup toggleGroup2 = new ToggleGroup();
@@ -64,8 +65,8 @@ public class BookLimoPage {
         trip = new Trip();
         trip.setTripNumber(0);
         Date date = new Date();
-        date.setStartDate(txtOn.getText());
-        date.setEndDate(txtToDate.getText());
+        date.setStartDate(datePickerStart.getValue().toString());
+        date.setEndDate(datePickerEnd.getValue().toString());
         trip.setTripDate(date);
         trip.setPickUp(txtFrom.getText());
         trip.setDestination(txtTo.getText());
@@ -92,9 +93,18 @@ public class BookLimoPage {
             trip.setNonStops();
         }
         Passenger passenger = new Passenger();
+        boolean val = Control.isValidID(txtID.getText().trim());
+        if(!val){
+            Error.error(Alert.AlertType.ERROR,"Error", "Wrong ID", "Please enter a valid ID");
+            return;
+        }
         passenger.setID(txtID.getText().trim());
         passenger.createTrip(trip);
         Control.searchPassenger(txtID.getText().trim(),"book",passenger, Main.passengerList);
         int c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "PassengerPage.fxml", "sample.gui.BookLimoPage");
     }
 }

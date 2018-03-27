@@ -4,23 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import sample.Control;
 import sample.Main;
+import sample.Scenes;
 import sample.files.FileClass;
+import sample.lang.Error;
 import sample.peoples.Passenger;
 import sample.vehicles.Vehicle;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.mail.internet.MimeMessage;
-import javax.activation.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Properties;
 
 public class BookTripPage {
 
@@ -46,9 +42,10 @@ public class BookTripPage {
     ListView<String> listViewTrips;
 
     private String [] arrSplit;
-    ObservableList<String> ol = FXCollections.observableArrayList(Main.list);
-
-    public void btnLoadTrips(ActionEvent actionEvent) {
+    private ObservableList<String> ol = FXCollections.observableArrayList(Main.list);
+    private Scenes scenes = new Scenes();
+    @FXML
+    public void initialize(){
         listViewTrips.setItems(ol);
     }
 
@@ -66,6 +63,11 @@ public class BookTripPage {
 
     public void btnBookTrip(ActionEvent actionEvent) {
         Passenger passenger = new Passenger();
+        boolean val = Control.isValidID(txtID.getText().trim());
+        if(!val){
+            Error.error(Alert.AlertType.ERROR,"Error", "Wrong ID", "Please enter a valid ID");
+            return;
+        }
         passenger.setID(txtID.getText());
         Control.searchPassenger(txtID.getText().trim(), "book", passenger, Main.passengerList);
         int c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
@@ -82,6 +84,7 @@ public class BookTripPage {
             vehicles = Main.miniList;
             f1 = 2;
         }
+        assert vehicles != null;
         for (int i = 0; i < vehicles.size(); i++){
             int busNum = vehicles.get(i).getNumber();
             /*for(int j =0; j < vehicles.get(i).passengers.size(); j++){
@@ -96,6 +99,10 @@ public class BookTripPage {
             }
         }
         if(f1==1) Main.busList=vehicles;
-        else if(f1==2) Main.miniList=vehicles;
+        else Main.miniList=vehicles;
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception {
+        scenes.btnAll(actionEvent, "PassengerPage.fxml", "sample.gui.BookTripPage");
     }
 }

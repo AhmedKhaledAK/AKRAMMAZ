@@ -5,10 +5,7 @@ import sample.Interfaces.ITrip;
 import sample.Main;
 import sample.files.FileClass;
 import sample.trips.Trip;
-import sample.vehicles.Limo;
 import sample.vehicles.Vehicle;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class Passenger extends People  implements ITrip{
@@ -54,9 +51,9 @@ public class Passenger extends People  implements ITrip{
         return -1;
     }
 
-    public void deleteTrip(String id, Passenger p, int num){
+    public boolean deleteTrip(String id, Passenger p, int num){
         Control.searchPassenger(id, "cancel", p, Main.passengerList);
-        deleteTrip(num, Main.limoTrips);
+        return deleteTrip(num, Main.limoTrips) == 1;
     }
 
     @Override
@@ -69,7 +66,7 @@ public class Passenger extends People  implements ITrip{
                 Main.limoTrips = trips;
                 FileClass fileClass = new FileClass("C:/Users/User/limotrips.txt");
                 fileClass.writeToFile(trips);
-                break;
+                return 1;
             }
         }
         return 0;

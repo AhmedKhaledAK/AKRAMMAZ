@@ -4,16 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.files.FileClass;
-import sample.gui.BookTripPage;
 import sample.peoples.Driver;
 import sample.peoples.Passenger;
-import sample.trips.Trip;
-import sample.vehicles.Bus;
 import sample.vehicles.Vehicle;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -31,6 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Bus Station");
+        //primaryStage.getIcons().add(new Image("https://en.wikipedia.org/wiki/File:Bath_Bus_Station.jpg"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

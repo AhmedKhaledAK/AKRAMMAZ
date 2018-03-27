@@ -4,12 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.BookTripPage">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.BookTripPage">
    <children>
-      <ListView fx:id="listViewTrips" layoutX="413.0" layoutY="67.0" onMouseClicked="#btnListClick" prefHeight="302.0" prefWidth="265.0" />
+      <ImageView fitHeight="439.0" fitWidth="714.0" opacity="0.63" pickOnBounds="true">
+         <image>
+            <Image url="@book_bus.jpg" />
+         </image>
+      </ImageView>
+      <ListView fx:id="listViewTrips" layoutX="413.0" layoutY="67.0" onMouseClicked="#btnListClick" opacity="0.68" prefHeight="302.0" prefWidth="265.0" />
       <Label alignment="CENTER" layoutX="446.0" layoutY="28.0" prefHeight="17.0" prefWidth="200.0" text="Available Trips" textAlignment="CENTER" />
       <Button layoutX="468.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnBookTrip" text="Book Trip" />
       <Label layoutX="184.0" layoutY="98.0" text="Selected Trip:">
@@ -17,7 +24,7 @@
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
       <Label fx:id="lblSelectedTrip" alignment="CENTER" layoutX="9.0" layoutY="122.0" prefHeight="17.0" prefWidth="387.0" text="Label" />
-      <Button layoutX="565.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnLoadTrips" text="Load Trips" />
+      <Button layoutX="565.0" layoutY="381.0" mnemonicParsing="false" text="Load Trips" />
       <TextField fx:id="txtID" layoutX="11.0" layoutY="36.0" promptText="ID" />
       <Label layoutX="36.0" layoutY="172.0" text="Price:">
          <font>
@@ -56,5 +63,7 @@
       </Label>
       <Label fx:id="lblBusNumber" layoutX="327.0" layoutY="300.0" text="Label" />
       <TextField fx:id="txtPromoCode" layoutX="210.0" layoutY="36.0" promptText="Promocode" />
+      <Button layoutX="40.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
+
    </children>
 </Pane>

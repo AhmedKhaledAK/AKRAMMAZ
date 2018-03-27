@@ -3,9 +3,8 @@ package sample.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import sample.Controller;
-import sample.Interfaces.ITrip;
+import sample.Scenes;
 import sample.lang.Error;
 import sample.Main;
 import sample.dates.Date;
@@ -13,9 +12,7 @@ import sample.files.FileClass;
 import sample.peoples.Driver;
 import sample.peoples.Manager;
 import sample.trips.Trip;
-import sample.vehicles.Bus;
 import sample.vehicles.Vehicle;
-
 import java.util.ArrayList;
 
 public class TripCreation {
@@ -56,6 +53,8 @@ public class TripCreation {
     @FXML
     RadioButton rdioButtonLimo;
 
+    private Scenes scenes = new Scenes();
+
     private ToggleGroup toggleGroup = new ToggleGroup();
     private  ToggleGroup toggleGroup1 = new ToggleGroup();
     private  ToggleGroup toggleGroup2 = new ToggleGroup();
@@ -86,7 +85,6 @@ public class TripCreation {
     public void btnCreateTrip(ActionEvent actionEvent) {
         trip = new Trip();
         trip.setTripNumber(Integer.parseInt(txtTripNumber.getText()));
-        
         Date date = new Date();
         date.setStartDate(datePickerStart.getValue().toString());
         date.setEndDate(datePickerEnd.getValue().toString());
@@ -129,21 +127,26 @@ public class TripCreation {
         trip.setTripType();
         ArrayList<Vehicle> vehicles=null;
         int f=0;
-        if(trip.getTripType().equals("bus")){
-            vehicles = Main.busList;
-            f=1;
-        }else if(trip.getTripType().equals("minibus")){
-            vehicles = Main.miniList;
-            f=2;
-        }else if(trip.getTripType().equals("limo")){
-            vehicles = Main.limoList;
-            f=3;
+        switch (trip.getTripType()) {
+            case "bus":
+                vehicles = Main.busList;
+                f = 1;
+                break;
+            case "minibus":
+                vehicles = Main.miniList;
+                f = 2;
+                break;
+            case "limo":
+                vehicles = Main.limoList;
+                f = 3;
+                break;
         }
         int in = manager.searchBus(Integer.parseInt(txtBusNumber.getText()), vehicles);
         int din = manager.searchDriver(driver.getID(), Main.driverList);
         if(in!=-1){
             if(din!=-1) {
                 if (manager.search(trip.getTripNumber(), Main.list) == -1) {
+                    assert vehicles != null;
                     if (vehicles.get(in).isAvailable()) {
                         if (Main.driverList.get(din).isAvaialble()) {
                             vehicle.setNumber(Integer.parseInt(txtBusNumber.getText()));
@@ -159,24 +162,39 @@ public class TripCreation {
                             fileClass.writeDrivers(Main.driverList,0,0);
                             if(f==1) Main.busList=vehicles;
                             else if(f==2) Main.miniList=vehicles;
-                            else if(f==3) Main.limoList=vehicles;
-                        } else Error.error("Error", "Bus Not Added",
+                            else Main.limoList=vehicles;
+                        } else Error.error(Alert.AlertType.ERROR,"Error", "Driver Not Added",
+                                "It looks like the driver is found but not available at the time.");
+                    }else {
+                        Error.error(Alert.AlertType.ERROR,"Error", "Bus Not Added",
                                 "It looks like the bus is found but not available at the time.");
                     }
+                }else {
+                    Error.error(Alert.AlertType.ERROR,"Error", "Trip Not Added",
+                            "It looks like there is another trip with the same number");
                 }
+            } else {
+                Error.error(Alert.AlertType.ERROR,"Error", "Driver Not Added",
+                        "It looks like there is no driver with this number.");
             }
         }else{
-            Error.error("Error", "Bus Not Added",
-                    "It looks like there is another bus with the same number");
+            Error.error(Alert.AlertType.ERROR,"Error", "Bus Not Added",
+                    "It looks like there is no bus with this number.");
         }
         if(trip.getTripNumber()!=0 && trip.getVehicle().getNumber()!=0) {
             int t = manager.createTrip(Integer.parseInt(txtTripNumber.getText()), Main.list, trip);
             if (t == 0) {
-                Error.error("Error", "Trip Not Added",
+                Error.error(Alert.AlertType.ERROR,"Error", "Trip Not Added",
                         "It looks like there is another trip with the same number");
+                return;
             }
             FileClass fc1 = new FileClass("C:/Users/User/trips.txt");
             fc1.writeToFile(Main.list);
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Success", "Trip has been added.");
         }
+    }
+
+    public void btnBack(ActionEvent actionEvent) throws Exception{
+        scenes.btnAll(actionEvent, "ManagerPage.fxml", "sample.gui.TripCreation");
     }
 }
