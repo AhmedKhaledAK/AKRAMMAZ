@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Control {
 
-    public static void searchPassenger(String id, String type, Passenger passenger, ArrayList<Passenger> passengers){
+    public static boolean searchPassenger(String id, String type, Passenger passenger, ArrayList<Passenger> passengers){
         int x = -1;
         for(int i = 0; i < passengers.size(); i++){
             if(passengers.get(i).getID().trim().equals(id.trim())){
@@ -22,9 +22,11 @@ public class Control {
                 }
                 x=i;
                 passenger.setNumberOfTrips(passengers.get(i).getNumberOfTrips());
+                updatePassengers(x,passenger, passengers);
+                return true;
             }
         }
-        updatePassengers(x,passenger, passengers);
+        return false;
     }
 
     private static void updatePassengers(int i, Passenger passenger, ArrayList<Passenger> passengers) {
@@ -35,14 +37,14 @@ public class Control {
         pfc.writePassengers(passengers);
     }
 
-    public static int searchPromoCodes(String promocode, ArrayList<String> promocodes){
+    public static boolean searchPromoCodes(String promocode, ArrayList<String> promocodes){
         for(int i = 0; i < promocodes.size(); i++){
             if(promocodes.get(i).trim().equalsIgnoreCase(promocode)){
                 System.out.println("You have got a discount!");
-                return 1;
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 
     public static boolean isValidID(String id){

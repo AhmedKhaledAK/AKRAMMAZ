@@ -92,5 +92,7 @@
          </children>
       </VBox>
       <Button layoutX="22.0" layoutY="317.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="116.0" text="Back" />
+      <Button layoutX="451.0" layoutY="130.0" mnemonicParsing="false" onAction="#btnCheckProfit" text="Check Profit" />
+      <TextField fx:id="txtProfit" layoutX="294.0" layoutY="130.0" promptText="Wanted Profit" />
     </children>
 </Pane>

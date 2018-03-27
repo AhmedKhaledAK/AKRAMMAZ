@@ -13,30 +13,29 @@ public class Trip {
     private Date tripDate;
     private String pickUp;
     private String destination;
-    private float cost;
-    Vehicle vehicle;
-    Driver driver;
-    String tripType;
-    boolean external, internal, oneWay, roundWay, oneStop, manyStops, nonStops;
+    private double cost;
+    private Vehicle vehicle;
+    private Driver driver;
+    private String tripType;
+    private boolean external, internal, oneWay, roundWay, oneStop, manyStops, nonStops;
 
 
-    public Trip(){
-        this.external=false;
-        this.internal=false;
-        this.oneWay=false;
-        this.roundWay=false;
-        this.oneStop=false;
-        this.manyStops=false;
-        this.nonStops=false;
+    public Trip() {
+        this.external = false;
+        this.internal = false;
+        this.oneWay = false;
+        this.roundWay = false;
+        this.oneStop = false;
+        this.manyStops = false;
+        this.nonStops = false;
     }
-
-
 
     public boolean isExternal() {
         return external;
     }
 
     public void setExternal() {
+        this.cost += 100;
         this.external = true;
     }
 
@@ -45,6 +44,7 @@ public class Trip {
     }
 
     public void setInternal() {
+        this.cost+=30;
         this.internal = true;
     }
 
@@ -53,6 +53,7 @@ public class Trip {
     }
 
     public void setOneWay() {
+        this.cost+=20;
         this.oneWay = true;
     }
 
@@ -61,6 +62,7 @@ public class Trip {
     }
 
     public void setRoundWay() {
+        this.cost+=10;
         this.roundWay = true;
     }
 
@@ -69,6 +71,7 @@ public class Trip {
     }
 
     public void setOneStop() {
+        this.cost+=20;
         this.oneStop = true;
     }
 
@@ -77,6 +80,7 @@ public class Trip {
     }
 
     public void setManyStops() {
+        this.cost+=5;
         this.manyStops = true;
     }
 
@@ -85,6 +89,7 @@ public class Trip {
     }
 
     public void setNonStops() {
+        this.cost+=40;
         this.nonStops = true;
     }
 
@@ -120,12 +125,12 @@ public class Trip {
         this.destination = destination;
     }
 
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost() {
-        this.cost = 15;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public Vehicle getVehicle() {

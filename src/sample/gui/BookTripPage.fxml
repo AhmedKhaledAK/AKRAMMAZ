@@ -64,6 +64,7 @@
       <Label fx:id="lblBusNumber" layoutX="327.0" layoutY="300.0" text="Label" />
       <TextField fx:id="txtPromoCode" layoutX="210.0" layoutY="36.0" promptText="Promocode" />
       <Button layoutX="40.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
+      <Button layoutX="374.0" layoutY="36.0" mnemonicParsing="false" onAction="#btnCheck" text="Check" />
 
    </children>
 </Pane>

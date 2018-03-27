@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class TripCreation {
 
-    Trip trip;
     @FXML
     TextField txtTripNumber;
     @FXML
@@ -52,6 +51,8 @@ public class TripCreation {
     RadioButton rdioBtnMini;
     @FXML
     RadioButton rdioButtonLimo;
+    @FXML
+    TextField txtProfit;
 
     private Scenes scenes = new Scenes();
 
@@ -82,8 +83,9 @@ public class TripCreation {
         }
     }
 
+    Trip trip = new Trip();
+
     public void btnCreateTrip(ActionEvent actionEvent) {
-        trip = new Trip();
         trip.setTripNumber(Integer.parseInt(txtTripNumber.getText()));
         Date date = new Date();
         date.setStartDate(datePickerStart.getValue().toString());
@@ -91,7 +93,6 @@ public class TripCreation {
         trip.setTripDate(date);
         trip.setPickUp(txtFrom.getText());
         trip.setDestination(txtTo.getText());
-        trip.setCost();
         if (rdioBtnExternal.isSelected()) {
             trip.setExternal();
         }
@@ -190,11 +191,20 @@ public class TripCreation {
             }
             FileClass fc1 = new FileClass("C:/Users/User/trips.txt");
             fc1.writeToFile(Main.list);
-            Error.error(Alert.AlertType.INFORMATION, "Information", "Success", "Trip has been added.");
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Success", "Trip has been added." +
+                    " Its cost is + " + trip.getCost());
         }
     }
 
     public void btnBack(ActionEvent actionEvent) throws Exception{
         scenes.btnAll(actionEvent, "ManagerPage.fxml", "sample.gui.TripCreation");
+    }
+
+    public void btnCheckProfit(ActionEvent actionEvent) {
+        if(rdioBtnBus.isSelected()){
+            trip.setCost(Double.parseDouble(txtProfit.getText().trim()) / 60);
+        }else if(rdioBtnMini.isSelected()){
+            trip.setCost(Double.parseDouble(txtProfit.getText().trim()) / 20);
+        }
     }
 }

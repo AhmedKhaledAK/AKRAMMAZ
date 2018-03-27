@@ -53,13 +53,15 @@ public class BookTripPage {
         String selectedItem = listViewTrips.getSelectionModel().getSelectedItem();
         arrSplit = selectedItem.split(",");
         lblSelectedTrip.setText(selectedItem);
-        lblPrice.setText(arrSplit[13]);
+        lblPrice.setText(arrSplit[15]);
         lblFrom.setText(arrSplit[1]);
         lblTo.setText(arrSplit[2]);
         lblStartDate.setText(arrSplit[3]);
         lblEndDate.setText(arrSplit[4]);
         lblBusNumber.setText(arrSplit[12]);
     }
+
+    boolean c;
 
     public void btnBookTrip(ActionEvent actionEvent) {
         Passenger passenger = new Passenger();
@@ -69,8 +71,9 @@ public class BookTripPage {
             return;
         }
         passenger.setID(txtID.getText());
-        Control.searchPassenger(txtID.getText().trim(), "book", passenger, Main.passengerList);
-        int c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
+        boolean b = Control.searchPassenger(txtID.getText().trim(), "book", passenger, Main.passengerList);
+        c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
+
         FileClass fc=null;
         ArrayList<Vehicle> vehicles=null;
         int f1=0;
@@ -100,9 +103,22 @@ public class BookTripPage {
         }
         if(f1==1) Main.busList=vehicles;
         else Main.miniList=vehicles;
+        if(b){
+            lblPrice.setText(Double.parseDouble(lblPrice.getText())/ 10 + "");
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Discount", "You have got a " +
+                    "discount! The trip cost is: " + lblPrice.getText());
+        }
     }
 
     public void btnBack(ActionEvent actionEvent) throws Exception {
         scenes.btnAll(actionEvent, "PassengerPage.fxml", "sample.gui.BookTripPage");
+    }
+
+    public void btnCheck(ActionEvent actionEvent) {
+        if(c){
+            lblPrice.setText(Double.parseDouble(lblPrice.getText())/ 5 + "");
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Discount", "You have got a " +
+                    "discount! The trip cost is: " + lblPrice.getText());
+        }
     }
 }

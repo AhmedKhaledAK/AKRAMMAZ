@@ -70,7 +70,8 @@ public class BookLimoPage {
         trip.setTripDate(date);
         trip.setPickUp(txtFrom.getText());
         trip.setDestination(txtTo.getText());
-        trip.setCost();
+        double cost = trip.getCost();
+        trip.setCost(cost * 10);
         if (rdioBtnExternal.isSelected()) {
             trip.setExternal();
         }
@@ -100,8 +101,17 @@ public class BookLimoPage {
         }
         passenger.setID(txtID.getText().trim());
         passenger.createTrip(trip);
-        Control.searchPassenger(txtID.getText().trim(),"book",passenger, Main.passengerList);
-        int c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
+        boolean b = Control.searchPassenger(txtID.getText().trim(),"book",passenger, Main.passengerList);
+        boolean c = Control.searchPromoCodes(txtPromoCode.getText().trim(), Main.promocodes);
+        if(b || c){
+            trip.setCost(trip.getCost() /5);
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Discount", "You have got a " +
+                    "discount! The trip cost is: " + trip.getCost());
+        }else if(b && c){
+            trip.setCost(trip.getCost() /10);
+            Error.error(Alert.AlertType.INFORMATION, "Information", "Discount", "You have got a " +
+                    "discount! The trip cost is: " + trip.getCost());
+        }
     }
 
     public void btnBack(ActionEvent actionEvent) throws Exception {
